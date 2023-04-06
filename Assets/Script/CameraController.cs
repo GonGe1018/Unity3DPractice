@@ -21,7 +21,7 @@ public class CameraController : MonoBehaviour
 
     }
 
-    void clickToRotate()
+    void clickToRotate()//우클릭을 통한 플레이어 회전
     {
         if (Input.GetMouseButton(1))
         {

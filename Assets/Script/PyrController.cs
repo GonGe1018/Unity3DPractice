@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class PyrController : MonoBehaviour
 {
-    public Animator animator;
-
-    public new Camera camera;
+    Animator animator;
+    //public new Camera camera;
     
-    float hAxis; float vAxis; bool wDown;
 
-    float xRotate = 0.0f;
+    public GameObject bullet;//총알 오브젝트
+    public Transform firePoint;//총알이 발사되는 지점
+
+    float hAxis; float vAxis; bool wDown; //인풋매니저 변수
+
     public float speed = 15f;
     Vector3 moveVec;
 
@@ -26,7 +28,7 @@ public class PyrController : MonoBehaviour
     {
         GetInput();
         Move();
-        
+        Attack();
     }
 
     void GetInput()
@@ -49,7 +51,14 @@ public class PyrController : MonoBehaviour
         {
             transform.LookAt(transform.position + moveVec);
         }
-        
+    }
+
+    void Attack()
+    {
+        if(Input.GetMouseButton(1)&&Input.GetMouseButtonDown(0))
+        {
+            Instantiate(bullet, firePoint.transform.position, firePoint.transform.rotation);
+        }
     }
 
 

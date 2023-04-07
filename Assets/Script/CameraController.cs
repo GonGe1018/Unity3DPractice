@@ -17,11 +17,11 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        clickToRotate();
+        skillMode();
 
     }
 
-    void clickToRotate()//우클릭을 통한 플레이어 회전
+    void skillMode()//스킬 모드
     {
         if (Input.GetMouseButton(1))
         {
@@ -36,6 +36,7 @@ public class CameraController : MonoBehaviour
                     Player.transform.LookAt(targetPos);
                 }  
             }
+            
         }
     }
 }

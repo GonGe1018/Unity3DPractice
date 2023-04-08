@@ -5,6 +5,7 @@ using UnityEngine;
 public class PyrController : MonoBehaviour
 {
     Animator animator;
+    public new Rigidbody rigidbody;
     //public new Camera camera;
     
 
@@ -13,13 +14,14 @@ public class PyrController : MonoBehaviour
 
     float hAxis; float vAxis; bool wDown; //인풋매니저 변수
 
-    public float speed = 15f;
+    public float speed = 50f;
     Vector3 moveVec;
 
 
     // Start is called before the first frame update
     void Awake()
     {
+        rigidbody = GetComponent<Rigidbody>();
         animator = GetComponentInChildren<Animator>();
     }
 
@@ -42,7 +44,7 @@ public class PyrController : MonoBehaviour
     {
         moveVec = new Vector3(hAxis,0,vAxis).normalized;//호리즌과 버티컬 값을 vector3로 변환, 그리고 normalized를 통하여 벡터 값을 항상 1로 고정
 
-        transform.position += moveVec*speed*Time.deltaTime;
+        rigidbody.velocity += moveVec*speed*Time.deltaTime;
 
         animator.SetBool("isRun",moveVec != Vector3.zero);//움직일 경우 isRun을 True로 바꿈
         animator.SetBool("isWalk",wDown);
@@ -55,7 +57,7 @@ public class PyrController : MonoBehaviour
 
     void Attack()
     {
-        if(Input.GetMouseButton(1)&&Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButton(1)&&Input.GetMouseButtonDown(0))//총알 발사
         {
             Instantiate(bullet, firePoint.transform.position, firePoint.transform.rotation);
         }
